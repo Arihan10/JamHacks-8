@@ -85,4 +85,8 @@ export default class UsersCtrl {
             res.status(500).json({ error: e.message })
         }
     }
+
+    static async apiGetContracts(req, res, next) {
+        
+    }
 }

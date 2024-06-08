@@ -62,7 +62,7 @@ export default class StudentsDAO {
 
             return await students.aggregate(pipeline).next(); 
         } catch (e) {
-            console.error(`Something went wrong in getStudentByName: ${e}`)
+            console.error(`Something went wrong in getStudentByEmail: ${e}`)
             throw e
         }
     }
@@ -104,6 +104,15 @@ export default class StudentsDAO {
         } catch (e) {
             console.error(`Unable to update student: ${e}`)
             return { error: e }
+        }
+    }
+
+    static async getStudentContracts(email) {
+        try {
+            const studentResponse = await this.getStudentByEmail(email)
+        } catch (e) {
+            console.error(`Something went wrong in getStudentContracts: ${e}`)
+            throw e
         }
     }
 }
