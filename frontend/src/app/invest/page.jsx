@@ -127,7 +127,7 @@ function StudentPreview() {
       <div className="text-zinc-300 gap-4">
         <h2 className="font-[600] text-zinc-100 text-xl">Arihan Sharma</h2>
         <p className="font-[400] text-zinc-400 text-md">@Arihan10</p>
-        <hr class="h-px mt-5 mb-3 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+        <hr className="h-px mt-5 mb-3 bg-gray-200 border-0 dark:bg-gray-700"></hr>
         <div className="h-2" />
         <Link href="https://www.google.com">
           <div
