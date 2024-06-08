@@ -91,7 +91,7 @@ export default class StudentsDAO {
         }
     }
 
-    static async addContract(contract) {
+    static async addContract(email, contract) {
         try {
             const updateResponse = await students.updateOne(
                 {
