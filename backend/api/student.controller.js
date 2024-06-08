@@ -1,4 +1,4 @@
-import studentsDAO from "../dao/studentsDAO.js"
+import StudentsDAO from "../dao/studentsDAO.js"
 
 export default class UsersCtrl {
     static async apiGetStudents(req, res, next) {
@@ -7,7 +7,7 @@ export default class UsersCtrl {
             filters.email = req.query.email
         }
 
-        const { studentsList, totalNumStudents } = await studentsDAO.getStudents({
+        const { studentsList, totalNumStudents } = await StudentsDAO.getStudents({
             filters,
         })
 
@@ -23,7 +23,7 @@ export default class UsersCtrl {
     static async apiGetUserByEmail(req, res, next) {
         try {
             let email = decodeURIComponent(req.params.email) || {}
-            let student = await studentsDAO.getStudentByEmail(email)
+            let student = await StudentsDAO.getStudentByEmail(email)
 
             if (!student) {
                 res.status(404).json({ error: "Not found bro" })
