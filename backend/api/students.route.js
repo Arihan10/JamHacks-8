@@ -9,3 +9,5 @@ router.
     .post(StudentsCtrl.apiPostUser)
 
 route.route("/email/:email").get(StudentsCtrl.apiGetUserByEmail)
+
+route.route("/contract").put(StudentsCtrl.apiPostContract)
