@@ -15,6 +15,7 @@ import {
   ResponsiveContainer,
   Line,
 } from "recharts";
+import { useEffect, useState } from 'react';
 
 const summary = {
   name: "Arihan Sharma",
@@ -46,8 +47,8 @@ function Investor(dat) {
         className="duration-300 transition-all hover:border-[1.5px] bg-gray-50/[0.01] hover:bg-gray-50/[0.05] hover:shadow-sm border-gray-300/20 rounded-xl p-6 flex flex-col gap-3 w-full"
       >
         <div className="flex flex-row items-center gap-2">
-          <Image src={pfp} className="rounded-full w-14"/>
-          <h3 className="font-bold text-sm md:text-lg">{data.name}</h3>
+          <Image alt="Profile picture" src={pfp} className="rounded-full w-14"/>
+          <h3 className="text-sm font-bold md:text-lg">{data.name}</h3>
           <p className="text-gray-100/60 font-[400]">{data.desc}</p>
         </div>
       </div>
@@ -55,18 +56,41 @@ function Investor(dat) {
   );
 }
 
-function StudentPreview() {
+function StudentPreview(params) {
+  const [data, setData] = useState({});
+  
+  useEffect(() => {
+    (async () => {
+      console.log(params.slug.slug)
+      fetch(`http://localhost:5000/users/email/${params.slug.slug}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+          }
+          return response.json(); // Parse the JSON from the response
+        })
+        .then(data => {
+          setData(user);
+          console.log(user);
+        })
+        .catch(error => {
+          console.error('There has been a problem with your fetch operation:', error);
+        });      
+    }
+    )();
+
+  },[data])
   return (
-    <div className="border-zinc-800 border-2 text-nowrap text-zinc-100 p-8 rounded-md flex flex-col gap-5 h-min">
+    <div className="flex flex-col gap-5 p-8 border-2 rounded-md border-zinc-800 text-nowrap text-zinc-100 h-min">
       <Image
         alt="Profile Picture"
         src={pfp}
-        className="rounded-full w-full"
+        className="w-full rounded-full"
       ></Image>
-      <div className="text-zinc-300 gap-4">
+      <div className="gap-4 text-zinc-300">
         <h2 className="font-[600] text-zinc-100 text-xl">Arihan Sharma</h2>
         <p className="font-[400] text-zinc-400 text-md">@Arihan10</p>
-        <hr class="h-px mt-5 mb-3 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+        <hr className="h-px mt-5 mb-3 bg-gray-200 border-0 dark:bg-gray-700"></hr>
         <div className="h-2" />
         <Link href="https://www.google.com">
           <div
@@ -105,7 +129,7 @@ function PerfGraph() {
   const col = delta < 0 ? "red" : "#34d399";
   console.log(min);
   return (
-    <div className="bg-transparent rounded-md w-full h-full">
+    <div className="w-full h-full bg-transparent rounded-md">
       <ResponsiveContainer width="100%" height={300}>
         <AreaChart
           data={data}
@@ -140,23 +164,23 @@ function PerfGraph() {
 
 function Tabs() {
   return (
-    <TabGroup className="p-3 flex-grow">
+    <TabGroup className="flex-grow p-3">
       <TabList className="space-x-3">
-        <Tab className="rounded-lg outline-none rounded-b-none py-2 border-zinc-800 border-b-0 border-2 ui-not-selected:opacity-40 hover:border-zinc-500 ui-selected:border-green-500/60 ui-selected:bg-green-950/30 duration-300 transition-all hover:px-7 ui-selected:px-10">
-          <div className="flex flex-row gap-3 items-center">
+        <Tab className="py-2 transition-all duration-300 border-2 border-b-0 rounded-lg rounded-b-none outline-none border-zinc-800 ui-not-selected:opacity-40 hover:border-zinc-500 ui-selected:border-green-500/60 ui-selected:bg-green-950/30 hover:px-7 ui-selected:px-10">
+          <div className="flex flex-row items-center gap-3">
             <Coin/>
             Investors
           </div>
         </Tab>
-        <Tab className="rounded-lg outline-none rounded-b-none py-2 border-zinc-800 border-b-0 border-2 ui-not-selected:opacity-40 hover:border-zinc-500 ui-selected:border-green-500/60 ui-selected:bg-green-950/30 duration-300 transition-all hover:px-7 ui-selected:px-10">
-          <div className="flex flex-row gap-3 items-center">
+        <Tab className="py-2 transition-all duration-300 border-2 border-b-0 rounded-lg rounded-b-none outline-none border-zinc-800 ui-not-selected:opacity-40 hover:border-zinc-500 ui-selected:border-green-500/60 ui-selected:bg-green-950/30 hover:px-7 ui-selected:px-10">
+          <div className="flex flex-row items-center gap-3">
             <GraphUpArrow/>
             Performance
           </div>
         </Tab>
       </TabList>
       <TabPanels className="leading-6 text-gray-300">
-        <TabPanel className="h-full w-full rounded-b-2xl border-2 border-zinc-800 p-3 flex flex-col">
+        <TabPanel className="flex flex-col w-full h-full p-3 border-2 rounded-b-2xl border-zinc-800">
           <Investor data={investor}/>
           <Investor data={investor}/>
           <Investor data={investor}/>
@@ -175,14 +199,14 @@ function Tabs() {
   );
 }
 
-function StudentProfile() {
+function StudentProfile({ params }) {
   console.log("profile!");
   return (
-    <div className="w-screen flex flex-col justify-center items-center">
+    <div className="flex flex-col items-center justify-center w-screen">
       <div className="min-w-[30rem] w-11/12 max-w-[65rem] bg-red-500/0 font-sgt p-3 rounded-lg gap-8 flex flex-row">
-        <StudentPreview />
+        <StudentPreview slug={params} />
         <div className="space-y-4">
-          <Markdown className="space-y-4 border-zinc-800 border-2 rounded-md p-10">
+          <Markdown className="p-10 space-y-4 border-2 rounded-md border-zinc-800">
             {summary.desc}
           </Markdown>
           <Tabs />
