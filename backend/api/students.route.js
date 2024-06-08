@@ -8,6 +8,8 @@ router.
     .get(StudentsCtrl.apiGetStudents)
     .post(StudentsCtrl.apiPostUser)
 
-route.route("/email/:email").get(StudentsCtrl.apiGetUserByEmail)
+router.route("/email/:email").get(StudentsCtrl.apiGetUserByEmail)
 
-route.route("/contract").put(StudentsCtrl.apiPostContract)
+router.route("/contract").put(StudentsCtrl.apiPostContract)
+
+export default router
