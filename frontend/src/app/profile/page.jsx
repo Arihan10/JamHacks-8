@@ -1,6 +1,4 @@
 "use client";
-import { useState } from "react";
-import { LineChart, ScatterChart } from "@mui/x-charts";
 import pfp from "/public/pfp.jpg";
 import Markdown from "react-markdown";
 import { People, PeopleFill, Linkedin, GraphUpArrow, Coin } from "react-bootstrap-icons";
@@ -26,13 +24,40 @@ const summary = {
 - ⚡ I love working with **C++**, **Java**, **C#**, **Python**.
 
 Check out my [portfolio!](https://frostbiiten.github.io/mypage)
-			`,
+`,
+  email: 'sofwarearihan@gmail.com',
   investors: 20,
 };
 
+const investor = {
+  name: "Arihan Sharma",
+  desc: `i just loaned you 3 dollar when will i get it back bro`,
+  email: 'sofwarearihan@gmail.com',
+  investors: 20,
+};
+
+function Investor(dat) {
+  const data = dat.data;
+
+  return (
+    <button className="p-3 bg-transparent">
+      <div
+        href="https://google.com"
+        className="duration-300 transition-all hover:border-[1.5px] bg-gray-50/[0.01] hover:bg-gray-50/[0.05] hover:shadow-sm border-gray-300/20 rounded-xl p-6 flex flex-col gap-3 w-full"
+      >
+        <div className="flex flex-row items-center gap-2">
+          <Image src={pfp} className="rounded-full w-14"/>
+          <h3 className="font-bold text-sm md:text-lg">{data.name}</h3>
+          <p className="text-gray-100/60 font-[400]">{data.desc}</p>
+        </div>
+      </div>
+    </button>
+  );
+}
+
 function StudentPreview() {
   return (
-    <div className="w-[18rem] border-zinc-800 border-2 text-zinc-100 p-8 rounded-md flex flex-col gap-5 h-min">
+    <div className="border-zinc-800 border-2 text-nowrap text-zinc-100 p-8 rounded-md flex flex-col gap-5 h-min">
       <Image
         alt="Profile Picture"
         src={pfp}
@@ -61,19 +86,6 @@ function StudentPreview() {
         )}
       </div>
     </div>
-  );
-}
-
-function Investor()
-{
-  return (
-  <div href="https://google.com" className="border-2 w-1/3 bg-gray-50/[0.02] border-white/20 rounded-xl p-6 flex gap-2">
-    <Image src={pfp} className="rounded-full h-16 w-16"/>
-    <div className="pl-3">
-      <h3 className="font-bold text-xl">Investor</h3>
-      <p className="text-gray-100/60">Among us</p>
-    </div>
-  </div>
   );
 }
 
@@ -143,12 +155,12 @@ function Tabs() {
           </div>
         </Tab>
       </TabList>
-      <TabPanels className="h-[32rem] leading-6 text-gray-300">
-        <TabPanel className="h-full w-full rounded-b-2xl border-2 border-zinc-800 p-4 flex flex-row flex-wrap gap-3">
-          <Investor/>
-          <Investor/>
-          <Investor/>
-          <Investor/>
+      <TabPanels className="leading-6 text-gray-300">
+        <TabPanel className="h-full w-full rounded-b-2xl border-2 border-zinc-800 p-3 flex flex-col">
+          <Investor data={investor}/>
+          <Investor data={investor}/>
+          <Investor data={investor}/>
+          <Investor data={investor}/>
         </TabPanel>
         <TabPanel className="w-full h-full">
           <div className="flex flex-row justify-center">
@@ -164,12 +176,10 @@ function Tabs() {
 }
 
 function StudentProfile() {
-  const [count, setCount] = useState(0);
   console.log("profile!");
   return (
     <div className="w-screen flex flex-col justify-center items-center">
-      <div className="min-w-[50rem] w-7/8 max-w-[120rem] bg-red-500/0 font-sgt p-3 rounded-lg gap-8 flex flex-row">
-        {/* TOP */}
+      <div className="min-w-[30rem] w-11/12 max-w-[65rem] bg-red-500/0 font-sgt p-3 rounded-lg gap-8 flex flex-row">
         <StudentPreview />
         <div className="space-y-4">
           <Markdown className="space-y-4 border-zinc-800 border-2 rounded-md p-10">
