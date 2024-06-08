@@ -65,4 +65,28 @@ export default class UsersCtrl {
             res.status(500).json({ error: e.message })
         }
     }
+
+    static async apiPostContract(req, res, next) {
+        try {
+            const email = req.body.email
+            const contract = req.body.contract
+
+            const StudentResponse = await StudentsDAO.addContract(
+                email,
+                contract,
+            )
+
+            if (StudentResponse.modifiedCount == 0) {
+                throw new Error("unable to update student contracts")
+            }
+
+            res.json(RentalResponse)
+        } catch (e) {
+            res.status(500).json({ error: e.message })
+        }
+    }
+
+    static async apiGetContracts(req, res, next) {
+        
+    }
 }
