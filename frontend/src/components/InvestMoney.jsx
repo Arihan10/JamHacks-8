@@ -11,12 +11,19 @@ export default function InvestMoney() {
 
 		const nearConnection = await useLogin(privateKey, accountId);
 		const account = await nearConnection.account(accountId);
-		await account.sendMoney('habibrahman.testnet', toYoctoNear('1.5'));
+		const final = await account.sendMoney(
+			'habibrahman.testnet',
+			toYoctoNear('1.5')
+		);
+		console.log(final);
+		const transactionHash = final.transaction.hash;
+		// Send transactionHash and update total monetary value in mongoDB
+		// - in the user it should increase totla monetary value, in investor it should increase total investment
 	}
 
 	return (
 		<div>
-			<button onClick={sendMoney}>Send Money</button>
+			<button onClick={sendMoney}>Invest Money</button>
 		</div>
 	);
 }
