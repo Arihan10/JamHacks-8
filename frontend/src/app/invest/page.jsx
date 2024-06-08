@@ -3,7 +3,7 @@ import { useState } from "react";
 import { LineChart, ScatterChart } from "@mui/x-charts";
 import pfp from "/public/pfp.jpg";
 import Markdown from "react-markdown";
-import { People, PeopleFill, Linkedin, GraphUpArrow, Coin } from "react-bootstrap-icons";
+import { People, PeopleFill, Linkedin, GraphUpArrow, Coin, PersonCircle} from "react-bootstrap-icons";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import Link from "next/link";
 import Image from "next/image";
@@ -29,53 +29,6 @@ Check out my [portfolio!](https://frostbiiten.github.io/mypage)
 			`,
   investors: 20,
 };
-
-function StudentPreview() {
-  return (
-    <div className="w-[18rem] border-zinc-800 border-2 text-zinc-100 p-8 rounded-md flex flex-col gap-5 h-min">
-      <Image
-        alt="Profile Picture"
-        src={pfp}
-        className="rounded-full w-full"
-      ></Image>
-      <div className="text-zinc-300 gap-4">
-        <h2 className="font-[600] text-zinc-100 text-xl">Arihan Sharma</h2>
-        <p className="font-[400] text-zinc-400 text-md">@Arihan10</p>
-        <hr class="h-px mt-5 mb-3 bg-gray-200 border-0 dark:bg-gray-700"></hr>
-        <div className="h-2" />
-        <Link href="https://www.google.com">
-          <div
-            className="flex flex-row items-center gap-2 hover:font-[900] transition-all duration-500
-						border-[2px] border-emerald-700
-						text-emerald-500 hover:text-emerald-300
-						rounded-lg py-[0.2rem] justify-center"
-          >
-            <PeopleFill />
-            <p>
-              <b>{summary.investors}</b> Investors
-            </p>
-          </div>
-        </Link>
-        {false && (
-          <Markdown className="space-y-2 leading-7">{summary.desc}</Markdown>
-        )}
-      </div>
-    </div>
-  );
-}
-
-function Investor()
-{
-  return (
-  <div href="https://google.com" className="border-2 w-1/3 bg-gray-50/[0.02] border-white/20 rounded-xl p-6 flex gap-2">
-    <Image src={pfp} className="rounded-full h-16 w-16"/>
-    <div className="pl-3">
-      <h3 className="font-bold text-xl">Investor</h3>
-      <p className="text-gray-100/60">Among us</p>
-    </div>
-  </div>
-  );
-}
 
 function PerfGraph() {
   const dataArr = Array.from(
@@ -132,8 +85,8 @@ function Tabs() {
       <TabList className="space-x-3">
         <Tab className="rounded-lg outline-none rounded-b-none py-2 border-zinc-800 border-b-0 border-2 ui-not-selected:opacity-40 hover:border-zinc-500 ui-selected:border-green-500/60 ui-selected:bg-green-950/30 duration-300 transition-all hover:px-7 ui-selected:px-10">
           <div className="flex flex-row gap-3 items-center">
-            <Coin/>
-            Investors
+            <PersonCircle/>
+            Students
           </div>
         </Tab>
         <Tab className="rounded-lg outline-none rounded-b-none py-2 border-zinc-800 border-b-0 border-2 ui-not-selected:opacity-40 hover:border-zinc-500 ui-selected:border-green-500/60 ui-selected:bg-green-950/30 duration-300 transition-all hover:px-7 ui-selected:px-10">
@@ -160,6 +113,53 @@ function Tabs() {
         </TabPanel>
       </TabPanels>
     </TabGroup>
+  );
+}
+
+function StudentPreview() {
+  return (
+    <div className="w-[18rem] border-zinc-800 border-2 text-zinc-100 p-8 rounded-md flex flex-col gap-5 h-min">
+      <Image
+        alt="Profile Picture"
+        src={pfp}
+        className="rounded-full w-full"
+      ></Image>
+      <div className="text-zinc-300 gap-4">
+        <h2 className="font-[600] text-zinc-100 text-xl">Arihan Sharma</h2>
+        <p className="font-[400] text-zinc-400 text-md">@Arihan10</p>
+        <hr class="h-px mt-5 mb-3 bg-gray-200 border-0 dark:bg-gray-700"></hr>
+        <div className="h-2" />
+        <Link href="https://www.google.com">
+          <div
+            className="flex flex-row items-center gap-2 hover:font-[900] transition-all duration-500
+						border-[2px] border-emerald-700
+						text-emerald-500 hover:text-emerald-300
+						rounded-lg py-[0.2rem] justify-center"
+          >
+            <PeopleFill />
+            <p>
+              <b>{summary.investors}</b> Investors
+            </p>
+          </div>
+        </Link>
+        {false && (
+          <Markdown className="space-y-2 leading-7">{summary.desc}</Markdown>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function Investor()
+{
+  return (
+  <div href="https://google.com" className="border-2 w-1/3 bg-gray-50/[0.02] border-white/20 rounded-xl p-6 flex gap-2">
+    <Image src={pfp} className="rounded-full h-16 w-16"/>
+    <div className="pl-3">
+      <h3 className="font-bold text-xl">Investor</h3>
+      <p className="text-gray-100/60">Among us</p>
+    </div>
+  </div>
   );
 }
 

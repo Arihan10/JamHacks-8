@@ -18,7 +18,7 @@ export function Navigation() {
 
 	useEffect(() => {
 		if (!wallet) {
-			login();
+			// login();
 		}
 	}, []);
 
