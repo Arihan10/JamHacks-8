@@ -6,7 +6,32 @@ import Markdown from "react-markdown";
 import { PersonCircle, } from "react-bootstrap-icons";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import Image from "next/image";
+import Backdrop from "@/common/backdrop";
 import { useRouter } from "next/router";
+import { motion, AnimatePresence } from "framer-motion";
+
+const loginAnim = {
+    hidden: {
+        opacity: 0,
+        y: "-90px"
+    },
+    visible: {
+        scale: 1,
+        opacity: 1,
+        y: "0",
+
+        transition: {
+            duration: 0.1,
+            type: "spring",
+            damping: 50,
+            stiffness: 500,
+        }
+    },
+    exit: {
+        scale: 0.9,
+        y: "-30px"
+    },
+}
 
 const summary = {
   name: "Arihan Sharma",
