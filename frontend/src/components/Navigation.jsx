@@ -1,29 +1,34 @@
+'use client';
 import { useEffect, useState, useContext } from 'react';
-import { NearContext } from '@/context';
+import { useLogin } from '../../lib/near';
+import { WalletContext } from '@/app/layout';
+import InvestMoney from './InvestMoney';
 
-export const Navigation = () => {
-	const { signedAccountId, wallet } = useContext(NearContext);
-	const [action, setAction] = useState(() => {});
-	const [label, setLabel] = useState('Loading...');
+export function Navigation() {
+	const [label, setLabel] = useState('Login');
+	const { wallet, setWallet } = useContext(WalletContext);
+
+	async function login() {
+		const walletConnection = await useLogin();
+		if (walletConnection.isSignedIn()) {
+			setLabel('Logged in');
+			setWallet(walletConnection);
+		}
+	}
 
 	useEffect(() => {
-		if (!wallet) return;
-
-		if (signedAccountId) {
-			setAction(() => wallet.signOut);
-			setLabel(`Logout ${signedAccountId}`);
-		} else {
-			setAction(() => wallet.signIn);
-			setLabel('Login');
+		if (!wallet) {
+			login();
 		}
-	}, [signedAccountId, wallet]);
+	}, []);
 
 	return (
 		<nav className='flex flex-row justify-end w-full p-2'>
-			<button className='bg-blue-500' onClick={action}>
+			<InvestMoney />
+			<button className='bg-blue-500' onClick={login}>
 				{' '}
 				{label}{' '}
 			</button>
 		</nav>
 	);
-};
+}
