@@ -1,15 +1,17 @@
 'use client';
-
-import { WalletContext } from '@/app/layout';
-import { useContext } from 'react';
-import { investMoney } from '../../lib/near';
+import { toYoctoNear, useLogin } from '../../lib/near';
 
 // Sample button
 export default function InvestMoney() {
-	const { wallet } = useContext(WalletContext);
+	async function sendMoney() {
+		const privateKey =
+			'ed25519:2MowWg9qrzFGc2RjzVzbbwhiufm3oZh98cTqMbeDDrECcHBrdyr6RYSduNjdfgisDC7usRjXipwE79ZUdyxYZXdk';
+		const accountId = 'mohammadanwar.testnet';
+		// retreive the above from mongodb
 
-	function sendMoney() {
-		investMoney(wallet, '5');
+		const nearConnection = await useLogin(privateKey, accountId);
+		const account = await nearConnection.account(accountId);
+		await account.sendMoney('habibrahman.testnet', toYoctoNear('1.5'));
 	}
 
 	return (
